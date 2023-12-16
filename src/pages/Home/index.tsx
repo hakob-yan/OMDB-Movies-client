@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from '../../redux/rootSlice'
-import { ICount } from '../../redux/rootSlice';
+import { increment, decrement } from '../../redux/features/movies/moviesSlice'
+import { ICount } from '../../redux/features/movies/moviesSlice';
 import * as S from "./styled"
 import axios from "axios";
 import Search from '../../components/Search';
