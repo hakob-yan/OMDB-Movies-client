@@ -6,7 +6,4 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-const axiosInstance = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com/",
-});
-
+export const axiosInstance = axios;
