@@ -8,15 +8,17 @@ export const MoviesCardImage = styled.div<{
   background-image: ${(props) =>
     props.backgroundImage ? `url(${props.backgroundImage})` : "none"};
   height: 100%;
+  min-height: 25rem;
+  max-height: 35rem;
 `;
 export const MoviesCardTitle = styled.p`
   text-align: center;
+  font-weight: bold;
 `;
 
 export const MoviesCardWrapper = styled.div`
   width: 20rem;
-  height: 100%;
   margin: 3.5rem;
-  color: black;
+  color: white;
   font-size: 1.3rem;
 `;

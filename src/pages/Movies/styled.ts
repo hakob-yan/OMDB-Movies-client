@@ -8,11 +8,11 @@ export const Container = styled.section`
 `;
 
 export const Wrapper = styled.div`
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 1fr 4fr;
+  grid-template-rows: minmax(8rem,10rem) 1fr;
 `;
 export const WrapperHeader = styled.div`
   width: 100%;
@@ -32,7 +32,6 @@ export const WrapperBody = styled.div`
 export const Movies = styled.div`
   height: 100%;
   min-height: 25rem;
-  max-height: 35rem;
   width: 100%;
   display: flex;
   justify-content: center;
