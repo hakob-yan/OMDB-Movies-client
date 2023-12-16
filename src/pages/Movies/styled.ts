@@ -35,6 +35,6 @@ export const Movies = styled.div`
   max-height: 35rem;
   width: 100%;
   display: flex;
-  gap: 0 5rem;
+  justify-content: center;
   flex-wrap: wrap;
 `;
