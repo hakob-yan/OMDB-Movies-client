@@ -1,11 +1,20 @@
-import React,{ReactElement} from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../../redux/rootSlice'
 import { ICount } from '../../redux/rootSlice';
-const Home = ():ReactElement => {
-  const count = useSelector((state:ICount) => state.value);  
-  const dispatch = useDispatch();
+import axios from "axios";
 
+const Home = (): ReactElement => {
+  const count = useSelector((state: ICount) => state.value);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    (async function () {
+      const res = await axios.get('/data')
+      console.log(res);
+      
+
+    })()
+  }, [])
   return (
     <div>
       <p>Count: {count}</p>
