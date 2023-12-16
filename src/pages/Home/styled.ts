@@ -22,4 +22,7 @@ export const WrapperBody = styled.div`
   width: 100%;
   background-color: red;
   background-color: rgba(7, 11, 21);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
