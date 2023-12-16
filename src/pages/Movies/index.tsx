@@ -22,9 +22,19 @@ const Home = (): ReactElement => {
     <S.Container>
       <S.Wrapper>
         <S.WrapperHeader />
-
         <S.WrapperBody>
           <Search value={searchValue} onChange={handleChange} />
+          <S.Movies>
+            <h1>Hello</h1>
+            <h1>Hello</h1>
+            <h1>Hello</h1>
+            <h1>Hello</h1>
+            <h1>Hello</h1>
+            <h1>Hello</h1>
+            <h1>Hello</h1>
+
+
+          </S.Movies>
         </S.WrapperBody>
       </S.Wrapper>
     </S.Container>
