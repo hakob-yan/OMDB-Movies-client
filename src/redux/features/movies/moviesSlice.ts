@@ -9,7 +9,9 @@ export interface IMovie {
   image: string;
 }
 
-const initialState: IMovie[] = [];
+const initialState: { recent: IMovie[] } = {
+  recent: [],
+};
 
 export const fetchRecentMovies = createAsyncThunk(
   "movies/fetchRecentMovies",
@@ -22,7 +24,10 @@ const counterSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchRecentMovies.fulfilled, (state, action) => {
-      console.log(action);
+      return {
+        ...state,
+        recent: action.payload,
+      };
     });
   },
 });
