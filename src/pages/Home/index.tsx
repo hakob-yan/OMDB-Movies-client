@@ -2,25 +2,25 @@ import React, { ReactElement, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../../redux/rootSlice'
 import { ICount } from '../../redux/rootSlice';
+import * as S from "./styled"
 import axios from "axios";
 
-const Home = (): ReactElement => {
-  const count = useSelector((state: ICount) => state.value);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    (async function () {
-      const res = await axios.get('/data')
-      console.log(res);
-      
 
-    })()
-  }, [])
+// <button onClick={() => dispatch(increment())}>Increment</button>
+// <button onClick={() => dispatch(decrement())}>Decrement</button>
+const Home = (): ReactElement => {
+
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => dispatch(increment())}>Increment</button>
-      <button onClick={() => dispatch(decrement())}>Decrement</button>
-    </div>
+    <S.Container>
+      <S.Wrapper>
+        <S.WrapperHeader>
+          d
+        </S.WrapperHeader>
+        <S.WrapperBody>
+          g
+        </S.WrapperBody>
+      </S.Wrapper>
+    </S.Container>
   );
 };
 
