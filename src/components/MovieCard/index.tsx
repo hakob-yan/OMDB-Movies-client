@@ -6,7 +6,7 @@ function MovieCard({ title, year, imdbID, type, image }: IMovie) {
   
   return (
     <S.MoviesCardWrapper>
-      <S.MoviesCardImage key={imdbID} backgroundImage={image} />;
+      <S.MoviesCardImage key={imdbID} backgroundImage={image} />
       <S.MoviesCardTitle>{title}</S.MoviesCardTitle>
     </S.MoviesCardWrapper>
   );

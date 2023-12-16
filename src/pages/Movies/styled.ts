@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: minmax(8rem,10rem) 1fr;
+  grid-template-rows: minmax(8rem, 10rem) 1fr;
 `;
 export const WrapperHeader = styled.div`
   width: 100%;
@@ -20,8 +20,8 @@ export const WrapperHeader = styled.div`
 `;
 export const WrapperBody = styled.div`
   width: 100%;
-  padding: 5rem;
-  gap: 5rem 0;
+  padding: 2.5rem;
+  gap: 3.5rem 0;
   background-color: red;
   background-color: rgba(7, 11, 21);
   display: flex;

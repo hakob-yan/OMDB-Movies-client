@@ -14,6 +14,7 @@ export const MoviesCardImage = styled.div<{
 export const MoviesCardTitle = styled.p`
   text-align: center;
   font-weight: bold;
+  margin: 0.5rem 0;
 `;
 
 export const MoviesCardWrapper = styled.div`
