@@ -4,9 +4,8 @@ import { getRecentMovies } from "../../../api";
 export interface IMovie {
   title: string;
   year: string;
-  runTime: string;
-  genre: string;
-  director: string;
+  imdbID: string;
+  type: string;
   image: string;
 }
 
