@@ -33,9 +33,10 @@ const Home = (): ReactElement => {
     localStorage.getItem(SEARCH) || ""
   );
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSeacrhValue(e.target.value);
-    localStorage.setItem(SEARCH, e.target.value);
-    debounced(e.target.value);
+    const inputValue = e.target.value;
+    localStorage.setItem(SEARCH, inputValue);
+    setSeacrhValue(inputValue);
+    inputValue.length > 1 && debounced(inputValue);
   };
   useEffect(() => {
     (async function () {
@@ -55,29 +56,31 @@ const Home = (): ReactElement => {
         <S.WrapperBody>
           <Search value={searchValue} onChange={handleChange} />
           <S.WrapperHeaderTitle>
-            {!isLoading &&
-              (!searchValue?.length
-                ? "Top movies"
-                : searchedMovies?.length
-                ? "Found movies"
-                : "No movies found")}
+            {isLoading
+              ? ""
+              : !searchValue?.length
+              ? "Recent Movies"
+              : `${searchedMovies.length} movies found`}
           </S.WrapperHeaderTitle>
           <S.Movies>
             {isLoading ? (
               <Loader />
             ) : (
-              (searchValue?.length ? searchedMovies : recentMovies)?.map(
-                (movie: IMovie) => (
-                  <MovieCard
-                    key={movie.imdbID}
-                    title={movie.title}
-                    image={movie.image}
-                    imdbID={movie.imdbID}
-                    year={movie.year}
-                    type={movie.type}
-                  />
-                )
-              )
+              (!searchedMovies.length
+                ? searchValue.length
+                  ? []
+                  : recentMovies
+                : searchedMovies
+              )?.map((movie: IMovie) => (
+                <MovieCard
+                  key={movie.imdbID}
+                  title={movie.title}
+                  image={movie.image}
+                  imdbID={movie.imdbID}
+                  year={movie.year}
+                  type={movie.type}
+                />
+              ))
             )}
           </S.Movies>
         </S.WrapperBody>
