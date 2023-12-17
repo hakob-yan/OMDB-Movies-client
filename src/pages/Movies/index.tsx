@@ -1,5 +1,8 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { fetchRecentMovies } from "../../redux/features/movies/moviesSlice";
+import {
+  fetchRecentMovies,
+  searchMoviesByTitle,
+} from "../../redux/features/movies/moviesSlice";
 
 import * as S from "./styled";
 import Search from "../../components/Search";
@@ -8,30 +11,36 @@ import { useSelector } from "react-redux";
 import { recentMoviesSelect } from "../../redux/features/movies/selectors";
 import MovieCard from "../../components/MovieCard";
 import Loader from "../../components/Loader";
+import { useDebouncedCallback } from "use-debounce";
 
 // <button onClick={() => dispatch(increment())}>Increment</button>
 // <button onClick={() => dispatch(decrement())}>Decrement</button>
 const Home = (): ReactElement => {
   const dispatch = useAppDispatch();
+  const debounced = useDebouncedCallback((value) => {
+    dispatch(searchMoviesByTitle(value));
+  }, 700);
   const recentMovies = useSelector(recentMoviesSelect);
   const [searchValue, setSeacrhValue] = useState("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSeacrhValue(e.target.value);
+    debounced(e.target.value);
   };
   useEffect(() => {
     dispatch(fetchRecentMovies());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <S.Container>
-      <S.Image/>
+      <S.Image />
       <S.Wrapper>
         <S.WrapperHeader />
         <S.WrapperBody>
           <Search value={searchValue} onChange={handleChange} />
           <S.Movies>
             {!recentMovies.length ? (
-             <Loader/>
+              <Loader />
             ) : (
               recentMovies.map((movie) => (
                 <MovieCard

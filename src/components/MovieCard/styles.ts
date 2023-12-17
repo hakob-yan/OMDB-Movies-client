@@ -1,12 +1,8 @@
 import { styled } from "styled-components";
 
-export const MoviesCardImage = styled.div<{
-  backgroundImage: string;
-}>`
+export const MoviesCardImage = styled.img`
   border-radius: 1.5rem;
   padding: 1rem;
-  background-image: ${(props) =>
-    props.backgroundImage ? `url(${props.backgroundImage})` : "none"};
   height: 100%;
   min-height: 25rem;
   max-height: 35rem;
