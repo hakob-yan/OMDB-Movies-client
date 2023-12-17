@@ -6,3 +6,7 @@ export const recentMoviesSelect = createSelector(
   selectSelf,
   (state) => state.recent
 );
+export const searchedMoviesSelect = createSelector(
+  selectSelf,
+  (state) => state.searchedMovies
+);
