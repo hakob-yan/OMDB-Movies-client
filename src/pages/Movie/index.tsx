@@ -22,7 +22,9 @@ function Movie() {
         <Loader />
       ) : (
         <S.MovieWrapper image={movie ? movie.image : ""}>
-          <S.AboutSection>1</S.AboutSection>
+          <S.AboutSection>
+            <S.Title>{movie.title}</S.Title>
+          </S.AboutSection>
           <S.CardSection>
             <S.Card image={movie.image} />
           </S.CardSection>
