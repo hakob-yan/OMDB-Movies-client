@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import {
+  IMovie,
   fetchRecentMovies,
   searchMoviesByTitle,
 } from "../../redux/features/movies/moviesSlice";
@@ -48,14 +49,18 @@ const Home = (): ReactElement => {
         <S.WrapperBody>
           <Search value={searchValue} onChange={handleChange} />
           <S.WrapperHeaderTitle>
-            {!searchValue?.length ? "Top movies" : searchedMovies?.length?"Found movies":"No movies found"} 
+            {!searchValue?.length
+              ? "Top movies"
+              : searchedMovies?.length
+              ? "Found movies"
+              : "No movies found"}
           </S.WrapperHeaderTitle>
           <S.Movies>
             {isLoading ? (
               <Loader />
             ) : (
               (searchValue?.length ? searchedMovies : recentMovies)?.map(
-                (movie) => (
+                (movie: IMovie) => (
                   <MovieCard
                     key={movie.imdbID}
                     title={movie.title}
