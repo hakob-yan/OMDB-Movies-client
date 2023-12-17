@@ -24,6 +24,10 @@ function Movie() {
         <S.MovieWrapper image={movie ? movie.image : ""}>
           <S.AboutSection>
             <S.Title>{movie.title}</S.Title>
+            <S.SubTitle>Year: {movie.year}</S.SubTitle>
+            <S.SubTitle>Runtime: {movie.runtime}</S.SubTitle>
+            <S.SubTitle>Genre: {movie.genre}</S.SubTitle>
+            <S.SubTitle>Diretor: {movie.director}</S.SubTitle>
           </S.AboutSection>
           <S.CardSection>
             <S.Card image={movie.image} />

@@ -30,8 +30,9 @@ export const AboutSection = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
-  justify-content: start;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
   padding-left: 5rem;
 `;
 export const Card = styled.div<{ image: string }>`
@@ -44,4 +45,11 @@ export const Title = styled.p`
   font-size: 3rem;
   color: #fff;
   font-weight: bold;
+`;
+
+export const SubTitle = styled.p`
+  font-size: 1.5rem;
+  color: #7a7c79;
+  font-weight: bold;
+  margin: 0.5rem 0;
 `;
