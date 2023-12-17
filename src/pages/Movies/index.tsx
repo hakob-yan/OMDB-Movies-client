@@ -47,20 +47,25 @@ const Home = (): ReactElement => {
         <S.WrapperHeader />
         <S.WrapperBody>
           <Search value={searchValue} onChange={handleChange} />
+          <S.WrapperHeaderTitle>
+            {!searchValue?.length ? "Top movies" : searchedMovies?.length?"Found movies":"No movies found"} 
+          </S.WrapperHeaderTitle>
           <S.Movies>
             {isLoading ? (
               <Loader />
             ) : (
-              searchedMovies.map((movie) => (
-                <MovieCard
-                  key={movie.imdbID}
-                  title={movie.title}
-                  image={movie.image}
-                  imdbID={movie.imdbID}
-                  year={movie.year}
-                  type={movie.type}
-                />
-              ))
+              (searchValue?.length ? searchedMovies : recentMovies).map(
+                (movie) => (
+                  <MovieCard
+                    key={movie.imdbID}
+                    title={movie.title}
+                    image={movie.image}
+                    imdbID={movie.imdbID}
+                    year={movie.year}
+                    type={movie.type}
+                  />
+                )
+              )
             )}
           </S.Movies>
         </S.WrapperBody>

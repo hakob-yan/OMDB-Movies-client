@@ -25,6 +25,11 @@ export const WrapperHeader = styled.div`
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 `;
+export const WrapperHeaderTitle = styled.p`
+  color: white;
+  font-size: 2rem;
+  text-align: start;
+`;
 export const WrapperBody = styled.div`
   width: 100%;
   background-color: rgba(7, 11, 21);

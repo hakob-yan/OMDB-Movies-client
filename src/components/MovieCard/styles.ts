@@ -16,6 +16,11 @@ export const MoviesCardTitle = styled.p`
 
 export const MoviesCardWrapper = styled.div`
   margin: 3.5rem;
+  cursor: pointer;
+  transition: all 100ms ease-in;
+  &:hover {
+    transform: scale(1.2);
+  }
   color: white;
   font-size: 1.3rem;
   display: flex;
