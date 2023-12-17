@@ -16,6 +16,7 @@ import {
 import MovieCard from "../../components/MovieCard";
 import Loader from "../../components/Loader";
 import { useDebouncedCallback } from "use-debounce";
+import { SEARCH } from "../../constants";
 
 const Home = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -28,9 +29,12 @@ const Home = (): ReactElement => {
   const recentMovies = useSelector(recentMoviesSelect);
   const searchedMovies = useSelector(searchedMoviesSelect);
 
-  const [searchValue, setSeacrhValue] = useState("");
+  const [searchValue, setSeacrhValue] = useState(
+    localStorage.getItem(SEARCH) || ""
+  );
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSeacrhValue(e.target.value);
+    localStorage.setItem(SEARCH, e.target.value);
     debounced(e.target.value);
   };
   useEffect(() => {
