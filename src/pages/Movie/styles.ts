@@ -33,7 +33,7 @@ export const AboutSection = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  padding-left: 5rem;
+  padding: 0 5rem;
 `;
 export const Card = styled.div<{ image: string }>`
   background-image: ${(props) => `url(${props.image})`};
@@ -45,6 +45,12 @@ export const Title = styled.p`
   font-size: 3rem;
   color: #fff;
   font-weight: bold;
+`;
+export const ButtonsSection = styled.div`
+  margin: 5rem 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export const SubTitle = styled.p`

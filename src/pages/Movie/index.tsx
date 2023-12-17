@@ -4,6 +4,7 @@ import { getMovieById } from "../../api";
 import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { IMovie } from "./types";
+import Button from "../../components/Button";
 
 function Movie() {
   let { movieId } = useParams();
@@ -16,6 +17,7 @@ function Movie() {
       }
     })();
   }, [movieId]);
+  const handleAddFavorite = () => {};
   return (
     <S.MovieContainer>
       {!movie ? (
@@ -28,6 +30,10 @@ function Movie() {
             <S.SubTitle>Runtime: {movie.runtime}</S.SubTitle>
             <S.SubTitle>Genre: {movie.genre}</S.SubTitle>
             <S.SubTitle>Diretor: {movie.director}</S.SubTitle>
+            <S.ButtonsSection>
+              <Button value="Add to favorites" onClick={handleAddFavorite} />
+              <Button value="Edit" onClick={handleAddFavorite} />
+            </S.ButtonsSection>
           </S.AboutSection>
           <S.CardSection>
             <S.Card image={movie.image} />
