@@ -1,18 +1,25 @@
 import { styled } from "styled-components";
 
 export const Container = styled.section`
+  /* position: relative; */
+`;
+export const Image = styled.div`
+  position: absolute;
   background-image: url("/wallpaper.jpg");
   background-size: cover;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100%;
+  width: 100%;
+  z-index: -999;
+  position: fixed;
   background-position: center;
 `;
 
 export const Wrapper = styled.div`
-  /* position: absolute; */
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: minmax(8rem, 10rem) 1fr;
+  grid-template-rows: 9rem 1fr;
 `;
 export const WrapperHeader = styled.div`
   width: 100%;
@@ -20,10 +27,10 @@ export const WrapperHeader = styled.div`
 `;
 export const WrapperBody = styled.div`
   width: 100%;
+  background-color: rgba(7, 11, 21);
+  min-height: calc(100vh - 7.5rem);
   padding: 2.5rem;
   gap: 3.5rem 0;
-  background-color: red;
-  background-color: rgba(7, 11, 21);
   display: flex;
   flex-direction: column;
   align-items: center;

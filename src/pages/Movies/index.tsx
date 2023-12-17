@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useSelector } from "react-redux";
 import { recentMoviesSelect } from "../../redux/features/movies/selectors";
 import MovieCard from "../../components/MovieCard";
+import Loader from "../../components/Loader";
 
 // <button onClick={() => dispatch(increment())}>Increment</button>
 // <button onClick={() => dispatch(decrement())}>Decrement</button>
@@ -23,23 +24,26 @@ const Home = (): ReactElement => {
   }, []);
   return (
     <S.Container>
+      <S.Image/>
       <S.Wrapper>
         <S.WrapperHeader />
         <S.WrapperBody>
           <Search value={searchValue} onChange={handleChange} />
           <S.Movies>
-            {!recentMovies.length
-              ? 4
-              : recentMovies.map((movie) => (
-                  <MovieCard
-                    key={movie.imdbID}
-                    title={movie.title}
-                    image={movie.image}
-                    imdbID={movie.imdbID}
-                    year={movie.year}
-                    type={movie.type}
-                  />
-                ))}
+            {!recentMovies.length ? (
+             <Loader/>
+            ) : (
+              recentMovies.map((movie) => (
+                <MovieCard
+                  key={movie.imdbID}
+                  title={movie.title}
+                  image={movie.image}
+                  imdbID={movie.imdbID}
+                  year={movie.year}
+                  type={movie.type}
+                />
+              ))
+            )}
           </S.Movies>
         </S.WrapperBody>
       </S.Wrapper>
