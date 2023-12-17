@@ -21,7 +21,12 @@ function Movie() {
       {!movie ? (
         <Loader />
       ) : (
-        <S.MovieWrapper image={movie ? movie.image : ""}>Hello</S.MovieWrapper>
+        <S.MovieWrapper image={movie ? movie.image : ""}>
+          <S.AboutSection>1</S.AboutSection>
+          <S.CardSection>
+            <S.Card image={movie.image} />
+          </S.CardSection>
+        </S.MovieWrapper>
       )}
     </S.MovieContainer>
   );
