@@ -13,7 +13,7 @@ export const ButtonWrapper = styled.button`
   cursor: pointer;
   transition: background-color 200ms ease;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0);
     outline: 2px #fff solid;
   }
   margin: 1.5rem;
