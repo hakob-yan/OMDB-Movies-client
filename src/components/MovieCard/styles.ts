@@ -48,7 +48,7 @@ export const AddFavorite = styled.img`
 export const Actions = styled.div`
   position: absolute;
   width: 100%;
-  bottom: 4rem;
+  bottom: 2.3rem;
   display: flex;
   justify-content: space-around;
   z-index: 999;
