@@ -21,9 +21,9 @@ import { SEARCH } from "../../constants";
 const Home = (): ReactElement => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const debounced = useDebouncedCallback((value) => {
+  const debounced = useDebouncedCallback(async (value) => {
     setIsLoading(true);
-    dispatch(searchMoviesByTitle(value)).unwrap();
+    await dispatch(searchMoviesByTitle(value)).unwrap();
     setIsLoading(false);
   }, 700);
   const recentMovies = useSelector(recentMoviesSelect);
@@ -38,9 +38,11 @@ const Home = (): ReactElement => {
     debounced(e.target.value);
   };
   useEffect(() => {
-    setIsLoading(true);
-    dispatch(fetchRecentMovies()).unwrap();
-    setIsLoading(false);
+    (async function () {
+      setIsLoading(true);
+      await dispatch(fetchRecentMovies()).unwrap();
+      setIsLoading(false);
+    })();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,11 +55,12 @@ const Home = (): ReactElement => {
         <S.WrapperBody>
           <Search value={searchValue} onChange={handleChange} />
           <S.WrapperHeaderTitle>
-            {!searchValue?.length
-              ? "Top movies"
-              : searchedMovies?.length
-              ? "Found movies"
-              : "No movies found"}
+            {!isLoading &&
+              (!searchValue?.length
+                ? "Top movies"
+                : searchedMovies?.length
+                ? "Found movies"
+                : "No movies found")}
           </S.WrapperHeaderTitle>
           <S.Movies>
             {isLoading ? (
