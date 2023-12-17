@@ -18,3 +18,11 @@ export const getMoviesByTitle = async (title: string) => {
     console.log(error);
   }
 };
+export const getMovieById = async (id: string) => {
+  try {
+    const response = await axiosInstance.get(`/api/movies/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

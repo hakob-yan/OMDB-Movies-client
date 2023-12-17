@@ -54,7 +54,7 @@ const Home = (): ReactElement => {
             {isLoading ? (
               <Loader />
             ) : (
-              (searchValue?.length ? searchedMovies : recentMovies).map(
+              (searchValue?.length ? searchedMovies : recentMovies)?.map(
                 (movie) => (
                   <MovieCard
                     key={movie.imdbID}
