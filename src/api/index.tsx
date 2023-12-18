@@ -8,6 +8,16 @@ export const getUsers = async () => {
     console.log(error);
   }
 };
+export const addUser = async (userName: string) => {
+  try {
+    const response = await axiosInstance.post(`/api/users/add`, {
+      user_name: userName,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getRecentMovies = async () => {
   try {

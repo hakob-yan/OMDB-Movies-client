@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./styles";
-import { useActionData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as paths from "../../constants/routerPaths";
 import Logo from "../../assets/images/logo.png";
 import { SEARCH } from "../../constants";
@@ -8,10 +8,11 @@ import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
 import { useSelector } from "react-redux";
 import { usersSelect } from "../../redux/features/users/selectors";
-import { setUser } from "../../redux/features/users/usersSlice";
+import { addNewUser, setUser } from "../../redux/features/users/usersSlice";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import Button from "../../components/Button";
 import AddUserModal from "../../components/AddUserModal";
+import { addUser } from "../../api";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -35,8 +36,9 @@ function NavBar() {
     value: `${el.id}`,
     label: el.name,
   }));
-  const handleAddUserCinfirm = () => {
-    
+  const handleAddUserCinfirm = async () => {
+    dispatch(addNewUser(newUserName));
+    setIsAddUserModalOpen(false);
   };
   return (
     <S.NavBar>
