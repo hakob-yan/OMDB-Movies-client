@@ -7,6 +7,7 @@ export interface IMovie {
   imdbID: string;
   type: string;
   image: string;
+  isFavorite: boolean;
 }
 
 const initialState: { recent: IMovie[]; searchedMovies: IMovie[] } = {

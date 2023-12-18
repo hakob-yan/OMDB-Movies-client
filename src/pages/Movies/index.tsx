@@ -77,6 +77,7 @@ const Home = (): ReactElement => {
                 : searchedMovies
               )?.map((movie: IMovie) => (
                 <MovieCard
+                  isFavorite={movie.isFavorite}
                   key={movie.imdbID}
                   title={movie.title}
                   image={movie.image}
