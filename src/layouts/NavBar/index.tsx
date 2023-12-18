@@ -57,7 +57,7 @@ function NavBar() {
           menuClassName="drop-down-users-menu"
           options={options}
           onChange={handleDropDownChange}
-          value={options[0]?.value}
+          value={`${users.activeUserId}`}
           placeholder="Select an option"
         />
         <AddUserModal
