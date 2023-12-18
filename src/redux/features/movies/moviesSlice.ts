@@ -4,10 +4,10 @@ import { getMoviesByTitle, getAllMovies } from "../../../api";
 export interface IMovie {
   title: string;
   year: string;
-  imdbID: string;
+  imdb_id: string;
   type: string;
   image: string;
-  isFavorite: boolean;
+  is_favorite: boolean;
 }
 
 const initialState: { all: IMovie[]; searchedMovies: IMovie[] } = {
@@ -29,9 +29,9 @@ const moviesSlice = createSlice({
   reducers: {
     deleteMovie(state, action) {
       const id = action.payload;
-      const all = state.all.filter((el) => el.imdbID !== id);
+      const all = state.all.filter((el) => el.imdb_id !== id);
       const searchedMovies = state.searchedMovies.filter(
-        (el) => el.imdbID !== id
+        (el) => el.imdb_id !== id
       );
 
       return {
@@ -46,11 +46,7 @@ const moviesSlice = createSlice({
       const allMovies = action.payload;
       return {
         ...state,
-        all: allMovies.map((el:any) => ({
-          ...el,
-          isFavorite: el.is_favorite,
-          imdbID: el.imdb_id,
-        })),
+        all: allMovies,
       };
     });
     builder.addCase(searchMoviesByTitle.fulfilled, (state, action) => {

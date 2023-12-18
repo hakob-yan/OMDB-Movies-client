@@ -8,7 +8,15 @@ import Modal from "../DeleteModal";
 import { deleteMovieById } from "../../api";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 
-function MovieCard({ title, year, imdbID, type, image }: IMovie) {
+function MovieCard({
+  title,
+  imdbID,
+  image,
+}: {
+  title: string;
+  imdbID: string;
+  image: string;
+}) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);

@@ -66,7 +66,7 @@ const Home = (): ReactElement => {
               ? ""
               : !searchValue?.length
               ? "User Movies "
-              : `${searchedMovies.length} movies found`}
+              : `${searchedMovies.length} global movies found(not user's but can delete)`}
           </S.WrapperHeaderTitle>
           <S.Movies>
             {isLoading ? (
@@ -79,13 +79,10 @@ const Home = (): ReactElement => {
                 : searchedMovies
               )?.map((movie: IMovie) => (
                 <MovieCard
-                  isFavorite={movie.isFavorite}
-                  key={movie.imdbID}
+                  key={movie.imdb_id}
                   title={movie.title}
                   image={movie.image}
-                  imdbID={movie.imdbID}
-                  year={movie.year}
-                  type={movie.type}
+                  imdbID={movie.imdb_id}
                 />
               ))
             )}
