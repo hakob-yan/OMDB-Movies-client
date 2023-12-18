@@ -12,15 +12,14 @@ function MovieCard({ title, year, imdbID, type, image }: IMovie) {
   const handleEdit = () => {};
   const handleDelete = () => {};
   return (
-    <S.MoviesCardWrapper onClick={handleClick}>
+    <S.MoviesCardWrapper>
       <S.AddFavorite src={star} />
+      <S.MoviesCardImage key={imdbID} src={image} onClick={handleClick} />
       <S.Actions>
         <Button value="Delete" onClick={handleDelete} />
         <Button value="Edit" onClick={handleEdit} />
-
       </S.Actions>
 
-      <S.MoviesCardImage key={imdbID} src={image} />
       <S.MoviesCardTitle>{title}</S.MoviesCardTitle>
     </S.MoviesCardWrapper>
   );
