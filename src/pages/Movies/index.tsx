@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import {
   IMovie,
-  fetchRecentMovies,
+  fetchAllMovies,
   searchMoviesByTitle,
 } from "../../redux/features/movies/moviesSlice";
 
@@ -10,7 +10,7 @@ import Search from "../../components/Search";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useSelector } from "react-redux";
 import {
-  recentMoviesSelect,
+  allMoviesSelect,
   searchedMoviesSelect,
 } from "../../redux/features/movies/selectors";
 import MovieCard from "../../components/MovieCard";
@@ -26,7 +26,7 @@ const Home = (): ReactElement => {
     await dispatch(searchMoviesByTitle(value)).unwrap();
     setIsLoading(false);
   }, 700);
-  const recentMovies = useSelector(recentMoviesSelect);
+  const allMovies = useSelector(allMoviesSelect);
   const searchedMovies = useSelector(searchedMoviesSelect);
 
   const [searchValue, setSeacrhValue] = useState(
@@ -44,7 +44,7 @@ const Home = (): ReactElement => {
       if (searchValue.length > 1) {
         debounced(searchValue);
       } else {
-        await dispatch(fetchRecentMovies()).unwrap();
+        await dispatch(fetchAllMovies()).unwrap();
       }
       setIsLoading(false);
     })();
@@ -63,7 +63,7 @@ const Home = (): ReactElement => {
             {isLoading
               ? ""
               : !searchValue?.length
-              ? "Recent Movies"
+              ? "All Movies"
               : `${searchedMovies.length} movies found`}
           </S.WrapperHeaderTitle>
           <S.Movies>
@@ -73,7 +73,7 @@ const Home = (): ReactElement => {
               (!searchedMovies.length
                 ? searchValue.length
                   ? []
-                  : recentMovies
+                  : allMovies
                 : searchedMovies
               )?.map((movie: IMovie) => (
                 <MovieCard

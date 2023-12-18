@@ -19,9 +19,9 @@ export const addUser = async (userName: string) => {
   }
 };
 
-export const getRecentMovies = async () => {
+export const getAllMovies = async () => {
   try {
-    const response = await axiosInstance.get("/api/movies/recent");
+    const response = await axiosInstance.get("/api/movies/all");
     return response.data;
   } catch (error) {
     console.log(error);

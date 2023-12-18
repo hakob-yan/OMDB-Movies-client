@@ -1,6 +1,6 @@
 // reducers.ts
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getMoviesByTitle, getRecentMovies } from "../../../api";
+import { getMoviesByTitle, getAllMovies } from "../../../api";
 export interface IMovie {
   title: string;
   year: string;
@@ -10,14 +10,14 @@ export interface IMovie {
   isFavorite: boolean;
 }
 
-const initialState: { recent: IMovie[]; searchedMovies: IMovie[] } = {
-  recent: [],
+const initialState: { all: IMovie[]; searchedMovies: IMovie[] } = {
+  all: [],
   searchedMovies: [],
 };
 
-export const fetchRecentMovies = createAsyncThunk(
-  "movies/fetchRecentMovies",
-  getRecentMovies
+export const fetchAllMovies = createAsyncThunk(
+  "movies/fetchAllMovies",
+  getAllMovies
 );
 export const searchMoviesByTitle = createAsyncThunk(
   "movies/searchMoviesByTitle",
@@ -29,23 +29,28 @@ const moviesSlice = createSlice({
   reducers: {
     deleteMovie(state, action) {
       const id = action.payload;
-      const recent = state.recent.filter((el) => el.imdbID !== id);
+      const all = state.all.filter((el) => el.imdbID !== id);
       const searchedMovies = state.searchedMovies.filter(
         (el) => el.imdbID !== id
       );
 
       return {
         ...state,
-        recent,
+        all,
         searchedMovies,
       };
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchRecentMovies.fulfilled, (state, action) => {
+    builder.addCase(fetchAllMovies.fulfilled, (state, action) => {
+      const allMovies = action.payload;
       return {
         ...state,
-        recent: action.payload,
+        all: allMovies.map((el:any) => ({
+          ...el,
+          isFavorite: el.is_favorite,
+          imdbID: el.imdb_id,
+        })),
       };
     });
     builder.addCase(searchMoviesByTitle.fulfilled, (state, action) => {
