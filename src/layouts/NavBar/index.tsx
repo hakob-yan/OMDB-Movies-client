@@ -39,6 +39,7 @@ function NavBar() {
   const handleAddUserCinfirm = async () => {
     dispatch(addNewUser(newUserName));
     setIsAddUserModalOpen(false);
+    setNewUserName("");
   };
   return (
     <S.NavBar>
