@@ -41,7 +41,11 @@ const Home = (): ReactElement => {
   useEffect(() => {
     (async function () {
       setIsLoading(true);
-      await dispatch(fetchRecentMovies()).unwrap();
+      if (searchValue.length > 1) {
+        debounced(searchValue);
+      } else {
+        await dispatch(fetchRecentMovies()).unwrap();
+      }
       setIsLoading(false);
     })();
 
