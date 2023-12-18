@@ -16,4 +16,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
 }
+.drop-down-users{
+  font-size: 0.8rem;
+}
 `;

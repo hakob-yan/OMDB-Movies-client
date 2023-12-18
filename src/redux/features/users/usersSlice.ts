@@ -2,7 +2,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getUsers } from "../../../api";
 
-const initialState: { id: number; name: string }[] = [];
+const initialState: {
+  activeUserId: string;
+  list: { id: number; name: string }[];
+} = { list: [], activeUserId: "" };
 
 export const getUsersList = createAsyncThunk("users/getUsers", getUsers);
 const counterSlice = createSlice({
@@ -11,7 +14,11 @@ const counterSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getUsersList.fulfilled, (state, action) => {
-      return action.payload;
+      return {
+        ...state,
+        list: action.payload,
+        activeUserId: action.payload[0].id,
+      };
     });
   },
 });
