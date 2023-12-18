@@ -1,6 +1,7 @@
 // reducers.ts
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getUsers } from "../../../api";
+import { updateUserAuthId } from "../../../lib/axios";
 
 const initialState: {
   activeUserId: string;
@@ -8,10 +9,18 @@ const initialState: {
 } = { list: [], activeUserId: "" };
 
 export const getUsersList = createAsyncThunk("users/getUsers", getUsers);
-const counterSlice = createSlice({
+const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser(state, action) {
+      updateUserAuthId(action.payload);
+      return {
+        ...state,
+        activeUserId: action.payload,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getUsersList.fulfilled, (state, action) => {
       return {
@@ -22,5 +31,6 @@ const counterSlice = createSlice({
     });
   },
 });
+export const { setUser} = userSlice.actions
 
-export default counterSlice.reducer;
+export default userSlice.reducer;

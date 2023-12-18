@@ -1,16 +1,19 @@
 import React from "react";
 import * as S from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useActionData, useNavigate } from "react-router-dom";
 import * as paths from "../../constants/routerPaths";
 import Logo from "../../assets/images/logo.png";
 import { SEARCH } from "../../constants";
-import Dropdown from "react-dropdown";
+import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
 import { useSelector } from "react-redux";
 import { usersSelect } from "../../redux/features/users/selectors";
+import { setUser } from "../../redux/features/users/usersSlice";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 
 function NavBar() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const users = useSelector(usersSelect);
   const handleClick = () => {
     localStorage.removeItem(SEARCH);
@@ -19,7 +22,9 @@ function NavBar() {
   const handleMoviesClick = () => {
     navigate(paths.HOME);
   };
-  const handleDropDownChange = () => {};
+  const handleDropDownChange = (option: Option) => {
+    dispatch(setUser(option.value));
+  };
   const options = users.list.map((el) => ({
     value: `${el.id}`,
     label: el.name,

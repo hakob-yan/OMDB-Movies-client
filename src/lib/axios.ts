@@ -7,3 +7,6 @@ axios.interceptors.response.use(
   }
 );
 export const axiosInstance = axios;
+export const updateUserAuthId = (id: string) => {
+  axiosInstance.defaults.headers.common["Authorization"] = id || "";
+};

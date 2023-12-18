@@ -22,7 +22,7 @@ export const searchMoviesByTitle = createAsyncThunk(
   "movies/searchMoviesByTitle",
   getMoviesByTitle
 );
-const counterSlice = createSlice({
+const moviesSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {},
@@ -42,4 +42,4 @@ const counterSlice = createSlice({
   },
 });
 
-export default counterSlice.reducer;
+export default moviesSlice.reducer;
