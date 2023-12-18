@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { usersSelect } from "../../redux/features/users/selectors";
 import { setUser } from "../../redux/features/users/usersSlice";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
+import Button from "../../components/Button";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function NavBar() {
   const handleDropDownChange = (option: Option) => {
     dispatch(setUser(option.value));
   };
+  const handeAddUserClick = () => {};
   const options = users.list.map((el) => ({
     value: `${el.id}`,
     label: el.name,
@@ -34,6 +36,13 @@ function NavBar() {
       <S.LiveMovies onClick={handleClick}>
         <S.LiveMoviesLogo src={Logo} />
         <S.LiveMoviesTitle>liveMovies</S.LiveMoviesTitle>
+        <Button
+          variant={2}
+          onClick={handeAddUserClick}
+          value="+ Add User"
+          fontSize="14px"
+        />
+
         <Dropdown
           className="drop-down-users"
           menuClassName="drop-down-users-menu"
