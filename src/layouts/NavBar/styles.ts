@@ -5,6 +5,7 @@ export const NavBar = styled.nav`
   padding: 1rem 3rem;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
   z-index: 999;
   color: white;
@@ -31,4 +32,9 @@ export const MoviesTitle = styled.p`
   &:hover {
     border: none;
   }
+`;
+
+export const Favorite = styled.img`
+  width: 2rem;
+  height: 2rem;
 `;

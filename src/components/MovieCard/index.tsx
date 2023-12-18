@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { IMovie, deleteMovie } from "../../redux/features/movies/moviesSlice";
+import { deleteMovie } from "../../redux/features/movies/moviesSlice";
 import star from "../../assets/images/favorite.svg";
 import * as S from "./styles";
 import Button from "../Button";

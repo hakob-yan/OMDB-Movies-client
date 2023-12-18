@@ -11,6 +11,7 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useSelector } from "react-redux";
 import {
   allMoviesSelect,
+  onlyFavoritesSelect,
   searchedMoviesSelect,
 } from "../../redux/features/movies/selectors";
 import MovieCard from "../../components/MovieCard";
@@ -29,6 +30,8 @@ const Home = (): ReactElement => {
     setIsLoading(false);
   }, 700);
   const allMovies = useSelector(allMoviesSelect);
+  const onlyFavorites = useSelector(onlyFavoritesSelect);
+
   const searchedMovies = useSelector(searchedMoviesSelect);
 
   const [searchValue, setSeacrhValue] = useState(
@@ -77,14 +80,16 @@ const Home = (): ReactElement => {
                   ? []
                   : allMovies
                 : searchedMovies
-              )?.map((movie: IMovie) => (
-                <MovieCard
-                  key={movie.imdb_id}
-                  title={movie.title}
-                  image={movie.image}
-                  imdbID={movie.imdb_id}
-                />
-              ))
+              )
+                ?.filter((movie) => movie.is_favorite === onlyFavorites)
+                .map((movie: IMovie) => (
+                  <MovieCard
+                    key={movie.imdb_id}
+                    title={movie.title}
+                    image={movie.image}
+                    imdbID={movie.imdb_id}
+                  />
+                ))
             )}
           </S.Movies>
         </S.WrapperBody>

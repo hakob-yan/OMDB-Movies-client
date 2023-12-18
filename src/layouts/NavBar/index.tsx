@@ -12,15 +12,19 @@ import { addNewUser, setUser } from "../../redux/features/users/usersSlice";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import Button from "../../components/Button";
 import AddUserModal from "../../components/AddUserModal";
-import { addUser } from "../../api";
+import starOn from "../../assets/images/favorite.svg";
+import starOff from "../../assets/images/favorite-off.svg";
+
+import { onlyFavoritesSelect } from "../../redux/features/movies/selectors";
+import { setOnlyFavorites } from "../../redux/features/movies/moviesSlice";
 
 function NavBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
   const [newUserName, setNewUserName] = useState("");
-
   const users = useSelector(usersSelect);
+  const onlyFavorites = useSelector(onlyFavoritesSelect);
   const handleClick = () => {
     localStorage.removeItem(SEARCH);
     navigate("/");
@@ -40,6 +44,9 @@ function NavBar() {
     dispatch(addNewUser(newUserName));
     setIsAddUserModalOpen(false);
     setNewUserName("");
+  };
+  const handleFavoriteClick = () => {
+    dispatch(setOnlyFavorites(!onlyFavorites));
   };
   return (
     <S.NavBar>
@@ -67,6 +74,10 @@ function NavBar() {
           confirm={handleAddUserCinfirm}
           onChange={setNewUserName}
           value={newUserName}
+        />
+        <S.Favorite
+          src={onlyFavorites ? starOn : starOff}
+          onClick={handleFavoriteClick}
         />
       </S.LiveMovies>
       <S.MoviesTitle onClick={handleMoviesClick}>Movies</S.MoviesTitle>

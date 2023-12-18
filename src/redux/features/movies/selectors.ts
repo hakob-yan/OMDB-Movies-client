@@ -7,3 +7,8 @@ export const searchedMoviesSelect = createSelector(
   selectSelf,
   (state) => state.searchedMovies
 );
+
+export const onlyFavoritesSelect = createSelector(
+  selectSelf,
+  (state) => state.onlyFavorites
+);

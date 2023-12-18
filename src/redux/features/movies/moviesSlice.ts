@@ -10,9 +10,14 @@ export interface IMovie {
   is_favorite: boolean;
 }
 
-const initialState: { all: IMovie[]; searchedMovies: IMovie[] } = {
+const initialState: {
+  all: IMovie[];
+  searchedMovies: IMovie[];
+  onlyFavorites: boolean;
+} = {
   all: [],
   searchedMovies: [],
+  onlyFavorites: true,
 };
 
 export const fetchAllMovies = createAsyncThunk(
@@ -40,6 +45,12 @@ const moviesSlice = createSlice({
         searchedMovies,
       };
     },
+    setOnlyFavorites(state, action) {
+      return {
+        ...state,
+        onlyFavorites: action.payload,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllMovies.fulfilled, (state, action) => {
@@ -57,6 +68,6 @@ const moviesSlice = createSlice({
     });
   },
 });
-export const { deleteMovie } = moviesSlice.actions;
+export const { deleteMovie, setOnlyFavorites } = moviesSlice.actions;
 
 export default moviesSlice.reducer;
