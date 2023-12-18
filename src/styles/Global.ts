@@ -19,4 +19,5 @@ body {
 .drop-down-users{
   font-size: 0.8rem;
 }
+.drop-down-users-menu{}
 `;

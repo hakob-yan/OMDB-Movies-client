@@ -31,6 +31,7 @@ function NavBar() {
         <S.LiveMoviesTitle>liveMovies</S.LiveMoviesTitle>
         <Dropdown
           className="drop-down-users"
+          menuClassName="drop-down-users-menu"
           options={options}
           onChange={handleDropDownChange}
           value={options[0]?.value}
