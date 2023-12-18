@@ -25,7 +25,21 @@ export const searchMoviesByTitle = createAsyncThunk(
 const moviesSlice = createSlice({
   name: "movie",
   initialState,
-  reducers: {},
+  reducers: {
+    deleteMovie(state, action) {
+      const id = action.payload;
+      const recent = state.recent.filter((el) => el.imdbID !== id);
+      const searchedMovies = state.searchedMovies.filter(
+        (el) => el.imdbID !== id
+      );
+
+      return {
+        ...state,
+        recent,
+        searchedMovies,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchRecentMovies.fulfilled, (state, action) => {
       return {
@@ -41,5 +55,6 @@ const moviesSlice = createSlice({
     });
   },
 });
+export const { deleteMovie } = moviesSlice.actions;
 
 export default moviesSlice.reducer;

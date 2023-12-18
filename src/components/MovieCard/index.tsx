@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { IMovie } from "../../redux/features/movies/moviesSlice";
+import { IMovie, deleteMovie } from "../../redux/features/movies/moviesSlice";
 import star from "../../assets/images/favorite.svg";
 import * as S from "./styles";
 import Button from "../Button";
 import { useState } from "react";
 import Modal from "../Modal";
 import { deleteMovieById } from "../../api";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 
 function MovieCard({ title, year, imdbID, type, image }: IMovie) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const handleClick = () => {
     navigate(`/movie/${imdbID}`);
@@ -17,6 +19,7 @@ function MovieCard({ title, year, imdbID, type, image }: IMovie) {
   const handleDeleteOpen = () => setIsDeleteModalOpen(true);
   const handleMovieDelete = async () => {
     await deleteMovieById(imdbID);
+    dispatch(deleteMovie(imdbID));
     setIsDeleteModalOpen(false);
   };
 

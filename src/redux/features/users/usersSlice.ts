@@ -23,6 +23,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getUsersList.fulfilled, (state, action) => {
+      updateUserAuthId(action.payload[0].id);
       return {
         ...state,
         list: action.payload,
@@ -31,6 +32,6 @@ const userSlice = createSlice({
     });
   },
 });
-export const { setUser} = userSlice.actions
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;
