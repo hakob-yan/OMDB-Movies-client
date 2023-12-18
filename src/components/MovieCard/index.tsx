@@ -5,6 +5,7 @@ import * as S from "./styles";
 import Button from "../Button";
 import { useState } from "react";
 import Modal from "../Modal";
+import { deleteMovieById } from "../../api";
 
 function MovieCard({ title, year, imdbID, type, image }: IMovie) {
   const navigate = useNavigate();
@@ -14,7 +15,10 @@ function MovieCard({ title, year, imdbID, type, image }: IMovie) {
   };
   const handleEdit = () => {};
   const handleDeleteOpen = () => setIsDeleteModalOpen(true);
-  const handleMovieDelete = () => setIsDeleteModalOpen(false);
+  const handleMovieDelete = async () => {
+    await deleteMovieById(imdbID);
+    setIsDeleteModalOpen(false);
+  };
 
   return (
     <S.MoviesCardWrapper>

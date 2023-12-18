@@ -1,5 +1,14 @@
 import { axiosInstance } from "../lib/axios";
 
+export const getUsers = async () => {
+  try {
+    const response = await axiosInstance.get(`/api/users`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getRecentMovies = async () => {
   try {
     const response = await axiosInstance.get("/api/movies/recent");
@@ -21,6 +30,14 @@ export const getMoviesByTitle = async (title: string) => {
 export const getMovieById = async (id: string) => {
   try {
     const response = await axiosInstance.get(`/api/movies/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const deleteMovieById = async (id: string) => {
+  try {
+    const response = await axiosInstance.delete(`/api/movies/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);

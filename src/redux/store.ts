@@ -1,10 +1,12 @@
 // store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import moviesReducr from "./features/movies/moviesSlice"; // You'll create this
+import moviesReducer from "./features/movies/moviesSlice";
+import usersReducer from "./features/users/usersSlice";
 
 const store = configureStore({
   reducer: {
-    movies: moviesReducr,
+    movies: moviesReducer,
+    users: usersReducer,
   },
 
   // other configuration options (middleware, devTools, etc.)
