@@ -17,9 +17,11 @@ import MovieCard from "../../components/MovieCard";
 import Loader from "../../components/Loader";
 import { useDebouncedCallback } from "use-debounce";
 import { SEARCH } from "../../constants";
+import { usersSelect } from "../../redux/features/users/selectors";
 
 const Home = (): ReactElement => {
   const dispatch = useAppDispatch();
+  const user = useSelector(usersSelect);
   const [isLoading, setIsLoading] = useState(false);
   const debounced = useDebouncedCallback(async (value) => {
     setIsLoading(true);
@@ -50,7 +52,7 @@ const Home = (): ReactElement => {
     })();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user.activeUserId]);
 
   return (
     <S.Container>
@@ -63,7 +65,7 @@ const Home = (): ReactElement => {
             {isLoading
               ? ""
               : !searchValue?.length
-              ? "All Movies"
+              ? "User Movies "
               : `${searchedMovies.length} movies found`}
           </S.WrapperHeaderTitle>
           <S.Movies>
