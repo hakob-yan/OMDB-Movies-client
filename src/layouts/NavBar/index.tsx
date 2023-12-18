@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./styles";
 import { useActionData, useNavigate } from "react-router-dom";
 import * as paths from "../../constants/routerPaths";
@@ -11,10 +11,14 @@ import { usersSelect } from "../../redux/features/users/selectors";
 import { setUser } from "../../redux/features/users/usersSlice";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import Button from "../../components/Button";
+import AddUserModal from "../../components/AddUserModal";
 
 function NavBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
+  const [newUserName, setNewUserName] = useState("");
+
   const users = useSelector(usersSelect);
   const handleClick = () => {
     localStorage.removeItem(SEARCH);
@@ -26,11 +30,14 @@ function NavBar() {
   const handleDropDownChange = (option: Option) => {
     dispatch(setUser(option.value));
   };
-  const handeAddUserClick = () => {};
+  const handeAddUserClick = () => setIsAddUserModalOpen(true);
   const options = users.list.map((el) => ({
     value: `${el.id}`,
     label: el.name,
   }));
+  const handleAddUserCinfirm = () => {
+    
+  };
   return (
     <S.NavBar>
       <S.LiveMovies onClick={handleClick}>
@@ -50,6 +57,13 @@ function NavBar() {
           onChange={handleDropDownChange}
           value={options[0]?.value}
           placeholder="Select an option"
+        />
+        <AddUserModal
+          isOpen={isAddUserModalOpen}
+          close={() => setIsAddUserModalOpen(false)}
+          confirm={handleAddUserCinfirm}
+          onChange={setNewUserName}
+          value={newUserName}
         />
       </S.LiveMovies>
       <S.MoviesTitle onClick={handleMoviesClick}>Movies</S.MoviesTitle>

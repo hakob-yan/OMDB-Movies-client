@@ -4,7 +4,7 @@ import star from "../../assets/images/favorite.svg";
 import * as S from "./styles";
 import Button from "../Button";
 import { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../DeleteModal";
 import { deleteMovieById } from "../../api";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 

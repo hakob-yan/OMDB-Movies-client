@@ -6,22 +6,26 @@ function Modal({
   isOpen,
   close,
   confirm,
+  value,
+  onChange,
 }: {
   isOpen: boolean;
   close: () => void;
   confirm: () => void;
+  value: string;
+  onChange: (e: string) => void;
 }) {
   const portal = document.getElementById("portals") as HTMLDivElement;
-
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
+  };
   if (isOpen) {
     return createPortal(
       <S.ModalWrapper>
         <S.ModalContenet>
-          <S.ModalTitle>
-            Are you sure you want to delete this movie?
-          </S.ModalTitle>
+          <S.Input onChange={handleChange} value={value} />
           <S.ModalBody>
-            <Button value="Ok" onClick={confirm} />
+            <Button value="Save" onClick={confirm} />
             <Button value="Cancel" onClick={close} />
           </S.ModalBody>
         </S.ModalContenet>
