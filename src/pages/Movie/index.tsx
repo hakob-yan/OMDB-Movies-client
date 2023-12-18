@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { IMovie } from "./types";
 import Button from "../../components/Button";
+import Modal from "../../components/Modal";
 
 function Movie() {
   let { movieId } = useParams();
