@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import * as paths from "../../constants/routerPaths";
 import Logo from "../../assets/images/logo.png";
 import { SEARCH } from "../../constants";
@@ -48,37 +48,43 @@ function NavBar() {
   const handleFavoriteClick = () => {
     dispatch(setOnlyFavorites(!onlyFavorites));
   };
+  const { pathname } = useLocation();
+
   return (
     <S.NavBar>
       <S.LiveMovies onClick={handleClick}>
         <S.LiveMoviesLogo src={Logo} />
         <S.LiveMoviesTitle>liveMovies</S.LiveMoviesTitle>
-        <Button
-          variant={2}
-          onClick={handeAddUserClick}
-          value="+ Add User"
-          fontSize="14px"
-        />
 
-        <Dropdown
-          className="drop-down-users"
-          menuClassName="drop-down-users-menu"
-          options={options}
-          onChange={handleDropDownChange}
-          value={`${users.activeUserId}`}
-          placeholder="Select an option"
-        />
-        <AddUserModal
-          isOpen={isAddUserModalOpen}
-          close={() => setIsAddUserModalOpen(false)}
-          confirm={handleAddUserCinfirm}
-          onChange={setNewUserName}
-          value={newUserName}
-        />
-        <S.Favorite
-          src={onlyFavorites ? starOn : starOff}
-          onClick={handleFavoriteClick}
-        />
+        {!pathname.startsWith("/movie/") ? (
+          <>
+            <Button
+              variant={2}
+              onClick={handeAddUserClick}
+              value="+ Add User"
+              fontSize="14px"
+            />
+            <Dropdown
+              className="drop-down-users"
+              menuClassName="drop-down-users-menu"
+              options={options}
+              onChange={handleDropDownChange}
+              value={`${users.activeUserId}`}
+              placeholder="Select an option"
+            />
+            <AddUserModal
+              isOpen={isAddUserModalOpen}
+              close={() => setIsAddUserModalOpen(false)}
+              confirm={handleAddUserCinfirm}
+              onChange={setNewUserName}
+              value={newUserName}
+            />
+            <S.Favorite
+              src={onlyFavorites ? starOn : starOff}
+              onClick={handleFavoriteClick}
+            />
+          </>
+        ) : null}
       </S.LiveMovies>
       <S.MoviesTitle onClick={handleMoviesClick}>Movies</S.MoviesTitle>
     </S.NavBar>
