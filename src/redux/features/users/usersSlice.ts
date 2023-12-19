@@ -6,7 +6,7 @@ import { updateUserAuthId } from "../../../lib/axios";
 const initialState: {
   activeUserId: string;
   list: { id: number; name: string }[];
-} = { list: [], activeUserId: "" };
+} = { list: [], activeUserId: "1" };
 
 export const getUsersList = createAsyncThunk("users/getUsers", getUsers);
 export const addNewUser = createAsyncThunk("users/addUser", addUser);

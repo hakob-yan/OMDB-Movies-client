@@ -40,23 +40,22 @@ const Home = (): ReactElement => {
     setSeacrhValue(inputValue);
   };
   useEffect(() => {
-    searchValue.length  && debounced(searchValue);
+    searchValue.length && debounced(searchValue);
     localStorage.setItem(SEARCH, searchValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
   useEffect(() => {
     (async function () {
       setIsLoading(true);
-      if (searchValue.length ) {
+      if (searchValue.length) {
         debounced(searchValue);
       } else {
         await dispatch(fetchAllMovies()).unwrap();
       }
       setIsLoading(false);
     })();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user.activeUserId]);
+  }, [Number(user.activeUserId)]);
 
   return (
     <S.Container>
