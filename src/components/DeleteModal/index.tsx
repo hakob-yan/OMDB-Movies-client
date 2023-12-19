@@ -17,11 +17,9 @@ function Modal({
     return createPortal(
       <S.ModalWrapper>
         <S.ModalContenet>
-          <S.ModalTitle>
-            Are you sure you want to delete this movie
-          </S.ModalTitle>
+          <S.ModalTitle>Are you sure you want to delete the movie</S.ModalTitle>
           <S.ModalBody>
-            <Button value="Save" onClick={confirm} />
+            <Button value="Ok" onClick={confirm} />
             <Button value="Cancel" onClick={close} />
           </S.ModalBody>
         </S.ModalContenet>

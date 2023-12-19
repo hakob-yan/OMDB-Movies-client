@@ -13,7 +13,7 @@ export const ModalWrapper = styled.div`
   align-items: center;
 `;
 
-export const ModalContenet = styled.div`
+export const ModalContenet = styled.form`
   width: fit-content;
   min-width: 27rem;
   background-color: #1b263b;

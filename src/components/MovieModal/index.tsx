@@ -5,6 +5,8 @@ import TextInput from "../TextInput";
 import Button from "../Button";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { addMovie, updateMovie } from "../../redux/features/movies/moviesSlice";
+import { useForm } from "react-hook-form";
+
 import { IMovie } from "../../pages/Movie/types";
 const initialdata = {
   title: "",
@@ -33,6 +35,11 @@ function Modal({
   };
 }) {
   const portal = document.getElementById("portals") as HTMLDivElement;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const dispatch = useAppDispatch();
   const [movieData, setMovieData] = useState({
     title: data?.title || initialdata.title,
