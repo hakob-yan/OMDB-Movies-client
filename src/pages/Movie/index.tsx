@@ -5,20 +5,38 @@ import { useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { IMovie } from "./types";
 import Button from "../../components/Button";
-import Modal from "../../components/DeleteModal";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { updateMovie } from "../../redux/features/movies/moviesSlice";
+import { toast } from "react-toastify";
 
 function Movie() {
   let { movieId } = useParams();
+  const dispatch = useAppDispatch();
   const [movie, setMovie] = useState<null | IMovie>(null);
+  const [isfavorite, setIsfavorite] = useState(false);
+
   useEffect(() => {
     (async function () {
       const movieResponse = await getMovieById(movieId || "");
       if (movieResponse) {
         setMovie(movieResponse);
+        setIsfavorite(movieResponse.is_favorite);
       }
     })();
   }, [movieId]);
-  const handleAddFavorite = () => {};
+  const handleToggleFavorite = () => {
+    dispatch(
+      updateMovie({
+        id: movieId as string,
+        data: {
+          is_favorite: !movie?.is_favorite,
+        },
+      })
+    );
+    setIsfavorite(!isfavorite);
+    toast("Toggled Favorites");
+  };
+
   return (
     <S.MovieContainer>
       {!movie ? (
@@ -32,8 +50,13 @@ function Movie() {
             <S.SubTitle>Genre: {movie.genre}</S.SubTitle>
             <S.SubTitle>Diretor: {movie.director}</S.SubTitle>
             <S.ButtonsSection>
-              <Button value="Add to favorites" onClick={handleAddFavorite} />
-              <Button value="Edit" onClick={handleAddFavorite} />
+              <Button
+                value={`${
+                  !isfavorite ? "Add to Favorite" : "Remove from favorites"
+                } `}
+                onClick={handleToggleFavorite}
+              />
+              <Button value="Edit" onClick={handleToggleFavorite} />
             </S.ButtonsSection>
           </S.AboutSection>
           <S.CardSection>

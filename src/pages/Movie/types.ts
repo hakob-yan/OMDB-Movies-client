@@ -6,4 +6,5 @@ export interface IMovie {
   director: string;
   image: string;
   runtime: string;
+  is_favorite: boolean;
 }
