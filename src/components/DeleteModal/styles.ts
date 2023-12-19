@@ -24,7 +24,7 @@ export const ModalTitle = styled.p`
   text-align: center;
   padding: 5rem;
   color: #fff;
-  font-size: 3rem;
+  font-size: 1.7rem;
 `;
 export const ModalBody = styled.div`
   display: flex;

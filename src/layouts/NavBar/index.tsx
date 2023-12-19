@@ -18,6 +18,7 @@ import starOff from "../../assets/images/favorite-off.svg";
 
 import { onlyFavoritesSelect } from "../../redux/features/movies/selectors";
 import { setOnlyFavorites } from "../../redux/features/movies/moviesSlice";
+import { toast } from "react-toastify";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ function NavBar() {
     if (newUserName.length) {
       dispatch(addNewUser(newUserName));
       setIsAddUserModalOpen(false);
+      toast('New User Added')
       setNewUserName("");
     }
   };

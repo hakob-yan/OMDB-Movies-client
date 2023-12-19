@@ -3,9 +3,10 @@ import * as S from "./styles";
 import Button from "../Button";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { addMovie, updateMovie } from "../../redux/features/movies/moviesSlice";
-import { SubmitHandler,  useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { IFormData } from "./utils";
 import { IMovie } from "../../pages/Movie/types";
+import { toast } from "react-toastify";
 
 function Modal({
   isOpen,
@@ -34,6 +35,7 @@ function Modal({
     } else {
       await dispatch(addMovie(data));
     }
+    toast("New Movie Added");
     close();
   };
 
