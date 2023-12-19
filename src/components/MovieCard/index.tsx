@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { deleteMovie } from "../../redux/features/movies/moviesSlice";
+import {
+  deleteMovie,
+  updateMovie,
+} from "../../redux/features/movies/moviesSlice";
 import starOn from "../../assets/images/favorite.svg";
 import starOff from "../../assets/images/favorite-off.svg";
 import * as S from "./styles";
@@ -34,6 +37,16 @@ function MovieCard({
     toast("Movie Deleted");
   };
   const handleToggleFavorite = () => {
+    console.log(!isFavorite);
+
+    dispatch(
+      updateMovie({
+        id: imdbID,
+        data: {
+          is_favorite: !isFavorite,
+        },
+      })
+    );
     toast("Added to Favorite Movies");
   };
   return (

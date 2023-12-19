@@ -54,11 +54,17 @@ export const deleteMovieById = async (id: string) => {
   }
 };
 
-export const addToFavoritesById = async (id: string) => {
+export const updateMovieById = async ({
+  id,
+  data,
+}: {
+  id: string;
+  data: {
+    is_favorite: boolean;
+  };
+}) => {
   try {
-    const response = await axiosInstance.put(`/api/movies/${id}`, {
-      is_favorite: true,
-    });
+    const response = await axiosInstance.put(`/api/movies/${id}`, { data });
     return response.data;
   } catch (error) {
     console.log(error);

@@ -1,6 +1,11 @@
 // reducers.ts
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getMoviesByTitle, getAllMovies, deleteMovieById } from "../../../api";
+import {
+  getMoviesByTitle,
+  getAllMovies,
+  deleteMovieById,
+  updateMovieById,
+} from "../../../api";
 export interface IMovie {
   title: string;
   year: string;
@@ -24,6 +29,7 @@ export const fetchAllMovies = createAsyncThunk(
   "movies/fetchAllMovies",
   getAllMovies
 );
+
 export const searchMoviesByTitle = createAsyncThunk(
   "movies/searchMoviesByTitle",
   getMoviesByTitle
@@ -31,6 +37,10 @@ export const searchMoviesByTitle = createAsyncThunk(
 export const deleteMovie = createAsyncThunk(
   "movies/deleteMovie",
   deleteMovieById
+);
+export const updateMovie = createAsyncThunk(
+  "movies/updateMovie",
+  updateMovieById
 );
 const moviesSlice = createSlice({
   name: "movie",
@@ -63,7 +73,28 @@ const moviesSlice = createSlice({
       const searchedMovies = state.searchedMovies.filter(
         (el) => el.imdb_id !== id
       );
-
+      return {
+        ...state,
+        all,
+        searchedMovies,
+      };
+    });
+    builder.addCase(updateMovie.fulfilled, (state, action) => {
+      const movie = action.payload;
+      const all = state.all.map((el) => {
+        if (el.imdb_id === movie.imdb_id) {
+          return movie;
+        } else {
+          return el;
+        }
+      });
+      const searchedMovies = state.searchedMovies.map((el) => {
+        if (el.imdb_id === movie.imdb_id) {
+          return movie;
+        } else {
+          return el;
+        }
+      });
       return {
         ...state,
         all,
