@@ -24,6 +24,9 @@ export const CardSection = styled.div`
   justify-content: start;
   align-items: center;
   padding-right: 5rem;
+  @media (max-width: 767px) {
+    display: none;
+  }
 `;
 export const AboutSection = styled.div`
   width: 100%;
@@ -45,12 +48,19 @@ export const Title = styled.p`
   font-size: 3rem;
   color: #fff;
   font-weight: bold;
+  @media (max-width: 767px) {
+    font-size: 1.5rem;
+  }
 `;
 export const ButtonsSection = styled.div`
   margin: 5rem 0;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 767px) {
+    justify-content: center;
+    margin: 2rem 0;
+  }
 `;
 
 export const SubTitle = styled.p`

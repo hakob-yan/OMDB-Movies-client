@@ -13,7 +13,11 @@ export const NavBar = styled.nav`
 `;
 export const LiveMovies = styled.div`
   display: flex;
-  gap: 0 1rem;
+  @media (max-width: 767px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  gap: 1rem 1rem;
   font-weight: bold;
   cursor: pointer;
 `;
@@ -31,6 +35,9 @@ export const MoviesTitle = styled.p`
   transition: all 100ms ease-out;
   &:hover {
     border: none;
+  }
+  @media (max-width: 900px) {
+    display: none;
   }
 `;
 

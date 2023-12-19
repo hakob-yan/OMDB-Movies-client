@@ -25,6 +25,13 @@ export const ModalContenet = styled.div`
   align-items: center;
   padding: 1rem;
   gap: 1rem 0;
+  @media (max-width: 767px) {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    gap: 0;
+  }
 `;
 
 export const ModalBody = styled.div`

@@ -32,6 +32,11 @@ export const MoviesCardWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 20rem;
+  @media (max-width: 760px) {
+    margin: 0;
+    width: 100%;
+    max-width: 22rem;
+  }
 `;
 export const AddFavorite = styled.img`
   width: 3rem;
