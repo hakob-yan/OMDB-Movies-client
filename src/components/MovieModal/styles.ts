@@ -15,8 +15,7 @@ export const ModalWrapper = styled.div`
 
 export const ModalContenet = styled.div`
   width: fit-content;
-  min-width: 20rem;
-  /* height: 30rem; */
+  min-width: 27rem;
   background-color: #1b263b;
   border-radius: 2rem;
   display: flex;
