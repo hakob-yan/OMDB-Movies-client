@@ -53,3 +53,14 @@ export const deleteMovieById = async (id: string) => {
     console.log(error);
   }
 };
+
+export const addToFavoritesById = async (id: string) => {
+  try {
+    const response = await axiosInstance.put(`/api/movies/${id}`, {
+      is_favorite: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

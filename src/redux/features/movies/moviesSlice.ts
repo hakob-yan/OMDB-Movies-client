@@ -1,6 +1,6 @@
 // reducers.ts
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getMoviesByTitle, getAllMovies } from "../../../api";
+import { getMoviesByTitle, getAllMovies, deleteMovieById } from "../../../api";
 export interface IMovie {
   title: string;
   year: string;
@@ -28,23 +28,14 @@ export const searchMoviesByTitle = createAsyncThunk(
   "movies/searchMoviesByTitle",
   getMoviesByTitle
 );
+export const deleteMovie = createAsyncThunk(
+  "movies/deleteMovie",
+  deleteMovieById
+);
 const moviesSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    deleteMovie(state, action) {
-      const id = action.payload;
-      const all = state.all.filter((el) => el.imdb_id !== id);
-      const searchedMovies = state.searchedMovies.filter(
-        (el) => el.imdb_id !== id
-      );
-
-      return {
-        ...state,
-        all,
-        searchedMovies,
-      };
-    },
     setOnlyFavorites(state, action) {
       return {
         ...state,
@@ -66,8 +57,21 @@ const moviesSlice = createSlice({
         searchedMovies: action.payload,
       };
     });
+    builder.addCase(deleteMovie.fulfilled, (state, action) => {
+      const id = action.payload;
+      const all = state.all.filter((el) => el.imdb_id !== id);
+      const searchedMovies = state.searchedMovies.filter(
+        (el) => el.imdb_id !== id
+      );
+
+      return {
+        ...state,
+        all,
+        searchedMovies,
+      };
+    });
   },
 });
-export const { deleteMovie, setOnlyFavorites } = moviesSlice.actions;
+export const { setOnlyFavorites } = moviesSlice.actions;
 
 export default moviesSlice.reducer;

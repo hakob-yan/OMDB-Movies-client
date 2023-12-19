@@ -31,18 +31,19 @@ const Home = (): ReactElement => {
   }, 700);
   const allMovies = useSelector(allMoviesSelect);
   const onlyFavorites = useSelector(onlyFavoritesSelect);
-
   const searchedMovies = useSelector(searchedMoviesSelect);
-
   const [searchValue, setSeacrhValue] = useState(
     localStorage.getItem(SEARCH) || ""
   );
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    localStorage.setItem(SEARCH, inputValue);
     setSeacrhValue(inputValue);
-    inputValue.length > 1 && debounced(inputValue);
   };
+  useEffect(() => {
+    searchValue.length > 1 && debounced(searchValue);
+    localStorage.setItem(SEARCH, searchValue);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue]);
   useEffect(() => {
     (async function () {
       setIsLoading(true);

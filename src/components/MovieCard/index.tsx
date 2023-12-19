@@ -6,7 +6,6 @@ import * as S from "./styles";
 import Button from "../Button";
 import { useState } from "react";
 import Modal from "../DeleteModal";
-import { deleteMovieById } from "../../api";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { toast } from "react-toastify";
 
@@ -30,7 +29,6 @@ function MovieCard({
   const handleEdit = () => {};
   const handleDeleteOpen = () => setIsDeleteModalOpen(true);
   const handleMovieDelete = async () => {
-    await deleteMovieById(imdbID);
     dispatch(deleteMovie(imdbID));
     setIsDeleteModalOpen(false);
     toast("Movie Deleted");
