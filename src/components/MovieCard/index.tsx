@@ -37,8 +37,6 @@ function MovieCard({
     toast("Movie Deleted");
   };
   const handleToggleFavorite = () => {
-    console.log(!isFavorite);
-
     dispatch(
       updateMovie({
         id: imdbID,
@@ -47,7 +45,7 @@ function MovieCard({
         },
       })
     );
-    toast("Added to Favorite Movies");
+    toast("Toggled Favorites");
   };
   return (
     <S.MoviesCardWrapper>
