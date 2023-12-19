@@ -8,6 +8,8 @@ import NavBar from "./layouts/NavBar";
 import Movie from "./pages/Movie";
 import { useAppDispatch } from "./hooks/useAppDispatch";
 import { getUsersList } from "./redux/features/users/usersSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App(): ReactElement {
   const dispatch = useAppDispatch();
@@ -26,6 +28,7 @@ function App(): ReactElement {
           <Route path={paths.MOVIE_PARAMS} element={<Movie />} />
           <Route path={paths.ALL} element={<Error />} />
         </Routes>
+        <ToastContainer />
       </div>
     </BrowserRouter>
   );

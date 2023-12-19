@@ -84,6 +84,7 @@ const Home = (): ReactElement => {
                 ?.filter((movie) => movie.is_favorite === onlyFavorites)
                 .map((movie: IMovie) => (
                   <MovieCard
+                    isFavorite={movie.is_favorite}
                     key={movie.imdb_id}
                     title={movie.title}
                     image={movie.image}

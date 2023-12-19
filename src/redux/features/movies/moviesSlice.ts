@@ -17,7 +17,7 @@ const initialState: {
 } = {
   all: [],
   searchedMovies: [],
-  onlyFavorites: true,
+  onlyFavorites: false,
 };
 
 export const fetchAllMovies = createAsyncThunk(
