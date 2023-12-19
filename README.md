@@ -1,1 +1,5 @@
-This Movie APP works by proxy -configure it before start
+- This Movie APP works by proxy -configure it(package.json "proxy": "http://localhost:5000") before start
+- Consider that App is free of best optimization , cause demands were ASAP
+- The user's movies are combined with database and omdb api , to be able to have all movies and also edit it.
+- After edit/delete it adds mark in database and when get movies it considers database marks
+- default user is '1' ,also yo can add if you want , any operation is under '1' user
