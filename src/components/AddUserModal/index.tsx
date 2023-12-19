@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import * as S from "./styles";
 import Button from "../Button";
+import TextInput from "../TextInput";
 
 function Modal({
   isOpen,
@@ -23,7 +24,7 @@ function Modal({
     return createPortal(
       <S.ModalWrapper>
         <S.ModalContenet>
-          <S.Input onChange={handleChange} value={value} />
+          <TextInput onChange={handleChange} value={value} />
           <S.ModalBody>
             <Button value="Save" onClick={confirm} />
             <Button value="Cancel" onClick={close} />

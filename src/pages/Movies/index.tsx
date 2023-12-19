@@ -40,14 +40,14 @@ const Home = (): ReactElement => {
     setSeacrhValue(inputValue);
   };
   useEffect(() => {
-    searchValue.length > 1 && debounced(searchValue);
+    searchValue.length  && debounced(searchValue);
     localStorage.setItem(SEARCH, searchValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
   useEffect(() => {
     (async function () {
       setIsLoading(true);
-      if (searchValue.length > 1) {
+      if (searchValue.length ) {
         debounced(searchValue);
       } else {
         await dispatch(fetchAllMovies()).unwrap();

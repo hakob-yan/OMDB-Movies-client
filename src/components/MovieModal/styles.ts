@@ -14,7 +14,7 @@ export const ModalWrapper = styled.div`
 `;
 
 export const ModalContenet = styled.div`
-  width: 50rem;
+  width: fit-content;
   min-width: 5rem;
   /* height: 30rem; */
   background-color: #1b263b;
@@ -24,4 +24,17 @@ export const ModalContenet = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
+`;
+
+export const ModalBody = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+export const InputTitles = styled.p`
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  color: #fff;
+  padding-left: 1rem;
 `;
