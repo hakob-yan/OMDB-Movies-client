@@ -7,25 +7,25 @@ import { IMovie } from "./types";
 import Button from "../../components/Button";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { updateMovie } from "../../redux/features/movies/moviesSlice";
+import MovieModal from "../../components/MovieModal";
 import { toast } from "react-toastify";
 
 function Movie() {
   let { movieId } = useParams();
   const dispatch = useAppDispatch();
   const [movie, setMovie] = useState<null | IMovie>(null);
-  const [isfavorite, setIsfavorite] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     (async function () {
       const movieResponse = await getMovieById(movieId || "");
       if (movieResponse) {
         setMovie(movieResponse);
-        setIsfavorite(movieResponse.is_favorite);
       }
     })();
   }, [movieId]);
-  const handleToggleFavorite = () => {
-    dispatch(
+  const handleToggleFavorite = async () => {
+    const data = await dispatch(
       updateMovie({
         id: movieId as string,
         data: {
@@ -33,16 +33,29 @@ function Movie() {
         },
       })
     );
-    setIsfavorite(!isfavorite);
+    setMovie(data.payload);
     toast("Toggled Favorites");
   };
-
+  const onSuccess = (result: IMovie) => setMovie(result);
   return (
     <S.MovieContainer>
       {!movie ? (
         <Loader />
       ) : (
         <S.MovieWrapper image={movie ? movie.image : ""}>
+          <MovieModal
+            data={{
+              title: movie.title,
+              year: movie.year,
+              runtime: movie.runtime,
+              director: movie.director,
+              genre: movie.genre,
+              movieId: movieId as string,
+            }}
+            isOpen={isEditModalOpen}
+            onSuccess={onSuccess}
+            close={() => setIsEditModalOpen(false)}
+          />
           <S.AboutSection>
             <S.Title>{movie.title}</S.Title>
             <S.SubTitle>Year: {movie.year}</S.SubTitle>
@@ -52,11 +65,13 @@ function Movie() {
             <S.ButtonsSection>
               <Button
                 value={`${
-                  !isfavorite ? "Add to Favorite" : "Remove from favorites"
+                  !movie.is_favorite
+                    ? "Add to Favorite"
+                    : "Remove from favorites"
                 } `}
                 onClick={handleToggleFavorite}
               />
-              <Button value="Edit" onClick={handleToggleFavorite} />
+              <Button value="Edit" onClick={() => setIsEditModalOpen(true)} />
             </S.ButtonsSection>
           </S.AboutSection>
           <S.CardSection>

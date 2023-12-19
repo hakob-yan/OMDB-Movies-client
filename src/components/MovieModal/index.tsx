@@ -3,25 +3,30 @@ import * as S from "./styles";
 import { useState } from "react";
 import TextInput from "../TextInput";
 import Button from "../Button";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { updateMovie } from "../../redux/features/movies/moviesSlice";
+import { IMovie } from "../../pages/Movie/types";
 
 function Modal({
   isOpen,
   close,
-  confirm,
-  data: { title, year, genre, runtime, director },
+  data: { title, year, genre, runtime, director, movieId },
+  onSuccess,
 }: {
   isOpen: boolean;
   close: () => void;
-  confirm: () => void;
+  onSuccess?: (data: IMovie) => void;
   data: {
     title: string;
     year: string;
     genre: string;
     runtime: string;
     director: string;
+    movieId: string;
   };
 }) {
   const portal = document.getElementById("portals") as HTMLDivElement;
+  const dispatch = useAppDispatch();
   const [movieData, setMovieData] = useState({
     title,
     year,
@@ -31,6 +36,13 @@ function Modal({
   });
   const handleInputChange = (value: string, section: string) => {
     setMovieData({ ...movieData, [section]: value });
+  };
+  const handleClick = async () => {
+    const result = await dispatch(
+      updateMovie({ id: movieId, data: movieData })
+    );
+    onSuccess && onSuccess(result.payload);
+    close();
   };
   if (isOpen) {
     return createPortal(
@@ -62,7 +74,7 @@ function Modal({
             value={movieData.director}
           />
           <S.ModalBody>
-            <Button value="Save" onClick={confirm} />
+            <Button value="Save" onClick={handleClick} />
             <Button value="Cancel" onClick={close} />
           </S.ModalBody>
         </S.ModalContenet>

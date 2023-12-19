@@ -59,7 +59,6 @@ function MovieCard({
     );
     toast("Toggled Favorites");
   };
-  const handleMovieEdit = () => {};
   return (
     <S.MoviesCardWrapper>
       <DeleteModal
@@ -74,8 +73,8 @@ function MovieCard({
           runtime,
           director,
           genre,
+          movieId: imdbID,
         }}
-        confirm={handleMovieEdit}
         isOpen={isEditModalOpen}
         close={() => setIsEditModalOpen(false)}
       />

@@ -15,7 +15,7 @@ export const ModalWrapper = styled.div`
 
 export const ModalContenet = styled.div`
   width: fit-content;
-  min-width: 5rem;
+  min-width: 20rem;
   /* height: 30rem; */
   background-color: #1b263b;
   border-radius: 2rem;
@@ -24,6 +24,7 @@ export const ModalContenet = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  gap: 1rem 0;
 `;
 
 export const ModalBody = styled.div`

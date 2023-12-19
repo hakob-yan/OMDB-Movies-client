@@ -60,7 +60,12 @@ export const updateMovieById = async ({
 }: {
   id: string;
   data: {
-    is_favorite: boolean;
+    is_favorite?: boolean;
+    title?: string;
+    year?: string;
+    genre?: string;
+    runtime?: string;
+    director?: string;
   };
 }) => {
   try {
