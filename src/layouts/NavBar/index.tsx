@@ -45,9 +45,11 @@ function NavBar() {
     label: el.name,
   }));
   const handleAddUserCinfirm = async () => {
-    dispatch(addNewUser(newUserName));
-    setIsAddUserModalOpen(false);
-    setNewUserName("");
+    if (newUserName.length) {
+      dispatch(addNewUser(newUserName));
+      setIsAddUserModalOpen(false);
+      setNewUserName("");
+    }
   };
   const handleFavoriteClick = () => {
     dispatch(setOnlyFavorites(!onlyFavorites));

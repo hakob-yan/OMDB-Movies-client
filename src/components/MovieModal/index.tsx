@@ -1,20 +1,11 @@
 import { createPortal } from "react-dom";
 import * as S from "./styles";
-import { useState } from "react";
-import TextInput from "../TextInput";
 import Button from "../Button";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { addMovie, updateMovie } from "../../redux/features/movies/moviesSlice";
-import { useForm } from "react-hook-form";
-
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IFormData } from "./utils";
 import { IMovie } from "../../pages/Movie/types";
-const initialdata = {
-  title: "",
-  year: "",
-  genre: "",
-  runtime: "",
-  director: "",
-};
 
 function Modal({
   isOpen,
@@ -25,76 +16,92 @@ function Modal({
   isOpen: boolean;
   close: () => void;
   onSuccess?: (data: IMovie) => void;
-  data?: {
-    title: string;
-    year: string;
-    genre: string;
-    runtime: string;
-    director: string;
-    movieId: string;
-  };
+  data?: IFormData;
 }) {
   const portal = document.getElementById("portals") as HTMLDivElement;
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<IFormData>({ defaultValues: data });
   const dispatch = useAppDispatch();
-  const [movieData, setMovieData] = useState({
-    title: data?.title || initialdata.title,
-    year: data?.year || initialdata.year,
-    genre: data?.genre || initialdata.genre,
-    runtime: data?.runtime || initialdata.runtime,
-    director: data?.director || initialdata.director,
-  });
-  const handleInputChange = (value: string, section: string) => {
-    setMovieData({ ...movieData, [section]: value });
-  };
-  const handleClick = async () => {
-    if (data) {
-      const result = await dispatch(
-        updateMovie({ id: data.movieId, data: movieData })
-      );
+
+  const submit: SubmitHandler<IFormData> = async (data) => {
+    if (data.movieId) {
+      const result = await dispatch(updateMovie({ id: data.movieId, data }));
+      updateMovie({ id: data.movieId, data });
       onSuccess && onSuccess(result.payload);
     } else {
-      await dispatch(addMovie(movieData));
-      setMovieData(initialdata);
+      await dispatch(addMovie(data));
     }
 
     close();
   };
+
   if (isOpen) {
     return createPortal(
       <S.ModalWrapper>
-        <S.ModalContenet>
+        <S.ModalContenet onSubmit={handleSubmit(submit)}>
           <S.InputTitles>Title</S.InputTitles>
-          <TextInput
-            onChange={(e) => handleInputChange(e.target.value, "title")}
-            value={movieData.title}
+          <S.Input
+            {...register("title", {
+              required: true,
+              minLength: {
+                value: 3,
+                message: "Should be at least 3 characters long",
+              },
+            })}
           />
+          <S.InputError>{errors?.title?.message}</S.InputError>
           <S.InputTitles>Year</S.InputTitles>
-          <TextInput
-            onChange={(e) => handleInputChange(e.target.value, "year")}
-            value={movieData.year}
+          <S.Input
+            {...register("year", {
+              required: true,
+              minLength: {
+                value: 3,
+                message: "Should be at least 3 characters long",
+              },
+            })}
           />
+          <S.InputError>{errors?.year?.message}</S.InputError>
           <S.InputTitles>Runtime</S.InputTitles>
-          <TextInput
-            onChange={(e) => handleInputChange(e.target.value, "runtime")}
-            value={movieData.runtime}
+          <S.Input
+            {...register("runtime", {
+              required: true,
+              minLength: {
+                value: 3,
+                message: "Should be at least 3 characters long",
+              },
+            })}
           />
+          <S.InputError>{errors?.runtime?.message}</S.InputError>
+
           <S.InputTitles>Genre</S.InputTitles>
-          <TextInput
-            onChange={(e) => handleInputChange(e.target.value, "genre")}
-            value={movieData.genre}
+          <S.Input
+            {...register("genre", {
+              required: true,
+              minLength: {
+                value: 3,
+                message: "Should be at least 3 characters long",
+              },
+            })}
           />
+          <S.InputError>{errors?.genre?.message}</S.InputError>
+
           <S.InputTitles>Director</S.InputTitles>
-          <TextInput
-            onChange={(e) => handleInputChange(e.target.value, "director")}
-            value={movieData.director}
+          <S.Input
+            {...register("director", {
+              required: true,
+              minLength: {
+                value: 3,
+                message: "Should be at least 3 characters long",
+              },
+            })}
           />
+          <S.InputError>{errors?.director?.message}</S.InputError>
+
           <S.ModalBody>
-            <Button value="Save" onClick={handleClick} />
+            <Button value="Save" />
             <Button value="Cancel" onClick={close} />
           </S.ModalBody>
         </S.ModalContenet>

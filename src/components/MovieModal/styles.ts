@@ -45,3 +45,21 @@ export const InputTitles = styled.p`
   color: #fff;
   padding-left: 1rem;
 `;
+
+export const Input = styled.input`
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  outline: none;
+  font-size: 1.3rem;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+`;
+export const InputError = styled.p`
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  color: red;
+  padding-left: 1rem;
+`;

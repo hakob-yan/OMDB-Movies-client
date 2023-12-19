@@ -1,5 +1,5 @@
 export interface IButton {
-  onClick: () => void;
+  onClick?: () => void;
   value: string;
   variant?: 1 | 2;
   width?: string;
