@@ -8,17 +8,27 @@ import starOff from "../../assets/images/favorite-off.svg";
 import * as S from "./styles";
 import Button from "../Button";
 import { useState } from "react";
-import Modal from "../DeleteModal";
+import DeleteModal from "../DeleteModal";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
+import MovieModal from "../MovieModal";
+
 import { toast } from "react-toastify";
 
 function MovieCard({
   title,
+  year,
+  genre,
+  runtime,
+  director,
   imdbID,
   image,
   isFavorite,
 }: {
   title: string;
+  year: string;
+  genre: string;
+  runtime: string;
+  director: string;
   imdbID: string;
   image: string;
   isFavorite: boolean;
@@ -26,10 +36,12 @@ function MovieCard({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const handleClick = () => {
     navigate(`/movie/${imdbID}`);
   };
-  const handleEdit = () => {};
+  const handleEdit = () => setIsEditModalOpen(true);
   const handleDeleteOpen = () => setIsDeleteModalOpen(true);
   const handleMovieDelete = async () => {
     dispatch(deleteMovie(imdbID));
@@ -47,13 +59,27 @@ function MovieCard({
     );
     toast("Toggled Favorites");
   };
+  const handleMovieEdit = () => {};
   return (
     <S.MoviesCardWrapper>
-      <Modal
+      <DeleteModal
         confirm={handleMovieDelete}
         isOpen={isDeleteModalOpen}
         close={() => setIsDeleteModalOpen(false)}
       />
+      <MovieModal
+        data={{
+          title,
+          year,
+          runtime,
+          director,
+          genre,
+        }}
+        confirm={handleMovieEdit}
+        isOpen={isEditModalOpen}
+        close={() => setIsEditModalOpen(false)}
+      />
+
       <S.AddFavorite
         src={isFavorite ? starOn : starOff}
         onClick={handleToggleFavorite}

@@ -88,6 +88,10 @@ const Home = (): ReactElement => {
                     isFavorite={movie.is_favorite}
                     key={movie.imdb_id}
                     title={movie.title}
+                    year={movie.year}
+                    runtime={movie.runtime}
+                    genre={movie.genre}
+                    director={movie.director}
                     image={movie.image}
                     imdbID={movie.imdb_id}
                   />

@@ -9,6 +9,9 @@ import {
 export interface IMovie {
   title: string;
   year: string;
+  genre: string;
+  runtime: string;
+  director: string;
   imdb_id: string;
   type: string;
   image: string;
