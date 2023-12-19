@@ -51,9 +51,8 @@ function Modal({
       );
       onSuccess && onSuccess(result.payload);
     } else {
-      const result = await dispatch(addMovie(movieData));
+      await dispatch(addMovie(movieData));
       setMovieData(initialdata);
-      console.log(result);
     }
 
     close();

@@ -107,9 +107,11 @@ const moviesSlice = createSlice({
       };
     });
     builder.addCase(addMovie.fulfilled, (state, action) => {
-      //todo
+      const all = [...state.all];
+      all.push(action.payload);
       return {
         ...state,
+        all,
       };
     });
   },
