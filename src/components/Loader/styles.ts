@@ -6,10 +6,10 @@ export const SpinnerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(7, 11, 21);
 `;
 
 export const Spinner = styled.img`
   width: 5rem;
   height: 5rem;
-
 `;
