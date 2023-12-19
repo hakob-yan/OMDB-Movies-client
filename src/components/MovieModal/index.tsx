@@ -3,7 +3,7 @@ import * as S from "./styles";
 import Button from "../Button";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { addMovie, updateMovie } from "../../redux/features/movies/moviesSlice";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler,  useForm } from "react-hook-form";
 import { IFormData } from "./utils";
 import { IMovie } from "../../pages/Movie/types";
 
@@ -34,7 +34,6 @@ function Modal({
     } else {
       await dispatch(addMovie(data));
     }
-
     close();
   };
 
@@ -46,8 +45,8 @@ function Modal({
           <S.Input
             {...register("title", {
               required: true,
-              minLength: {
-                value: 3,
+              pattern: {
+                value: /[A-Za-z]{3,}/,
                 message: "Should be at least 3 characters long",
               },
             })}
@@ -57,9 +56,9 @@ function Modal({
           <S.Input
             {...register("year", {
               required: true,
-              minLength: {
-                value: 3,
-                message: "Should be at least 3 characters long",
+              pattern: {
+                value: /^[12][0-9]{3}$/,
+                message: "Should be a valid year(ex.2021)",
               },
             })}
           />
@@ -68,8 +67,8 @@ function Modal({
           <S.Input
             {...register("runtime", {
               required: true,
-              minLength: {
-                value: 3,
+              pattern: {
+                value: /[A-Za-z]{3,}/,
                 message: "Should be at least 3 characters long",
               },
             })}
@@ -80,8 +79,8 @@ function Modal({
           <S.Input
             {...register("genre", {
               required: true,
-              minLength: {
-                value: 3,
+              pattern: {
+                value: /[A-Za-z]{3,}/,
                 message: "Should be at least 3 characters long",
               },
             })}
@@ -92,8 +91,8 @@ function Modal({
           <S.Input
             {...register("director", {
               required: true,
-              minLength: {
-                value: 3,
+              pattern: {
+                value: /[A-Za-z]{3,}/,
                 message: "Should be at least 3 characters long",
               },
             })}
