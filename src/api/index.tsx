@@ -75,3 +75,17 @@ export const updateMovieById = async ({
     console.log(error);
   }
 };
+export const addNewMovie = async (data: {
+  title: string;
+  year: string;
+  genre: string;
+  runtime: string;
+  director: string;
+}) => {
+  try {
+    const response = await axiosInstance.post(`/api/movies/add`, data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

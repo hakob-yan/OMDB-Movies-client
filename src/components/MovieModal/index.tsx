@@ -4,19 +4,26 @@ import { useState } from "react";
 import TextInput from "../TextInput";
 import Button from "../Button";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { updateMovie } from "../../redux/features/movies/moviesSlice";
+import { addMovie, updateMovie } from "../../redux/features/movies/moviesSlice";
 import { IMovie } from "../../pages/Movie/types";
+const initialdata = {
+  title: "",
+  year: "",
+  genre: "",
+  runtime: "",
+  director: "",
+};
 
 function Modal({
   isOpen,
   close,
-  data: { title, year, genre, runtime, director, movieId },
+  data,
   onSuccess,
 }: {
   isOpen: boolean;
   close: () => void;
   onSuccess?: (data: IMovie) => void;
-  data: {
+  data?: {
     title: string;
     year: string;
     genre: string;
@@ -28,20 +35,27 @@ function Modal({
   const portal = document.getElementById("portals") as HTMLDivElement;
   const dispatch = useAppDispatch();
   const [movieData, setMovieData] = useState({
-    title,
-    year,
-    genre,
-    runtime,
-    director,
+    title: data?.title || initialdata.title,
+    year: data?.year || initialdata.year,
+    genre: data?.genre || initialdata.genre,
+    runtime: data?.runtime || initialdata.runtime,
+    director: data?.director || initialdata.director,
   });
   const handleInputChange = (value: string, section: string) => {
     setMovieData({ ...movieData, [section]: value });
   };
   const handleClick = async () => {
-    const result = await dispatch(
-      updateMovie({ id: movieId, data: movieData })
-    );
-    onSuccess && onSuccess(result.payload);
+    if (data) {
+      const result = await dispatch(
+        updateMovie({ id: data.movieId, data: movieData })
+      );
+      onSuccess && onSuccess(result.payload);
+    } else {
+      const result = await dispatch(addMovie(movieData));
+      setMovieData(initialdata);
+      console.log(result);
+    }
+
     close();
   };
   if (isOpen) {

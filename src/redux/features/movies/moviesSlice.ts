@@ -5,6 +5,7 @@ import {
   getAllMovies,
   deleteMovieById,
   updateMovieById,
+  addNewMovie,
 } from "../../../api";
 export interface IMovie {
   title: string;
@@ -45,6 +46,7 @@ export const updateMovie = createAsyncThunk(
   "movies/updateMovie",
   updateMovieById
 );
+export const addMovie = createAsyncThunk("movies/addMovie", addNewMovie);
 const moviesSlice = createSlice({
   name: "movie",
   initialState,
@@ -102,6 +104,12 @@ const moviesSlice = createSlice({
         ...state,
         all,
         searchedMovies,
+      };
+    });
+    builder.addCase(addMovie.fulfilled, (state, action) => {
+      //todo
+      return {
+        ...state,
       };
     });
   },

@@ -12,6 +12,7 @@ import { addNewUser, setUser } from "../../redux/features/users/usersSlice";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import Button from "../../components/Button";
 import AddUserModal from "../../components/AddUserModal";
+import MovieModal from "../../components/MovieModal";
 import starOn from "../../assets/images/favorite.svg";
 import starOff from "../../assets/images/favorite-off.svg";
 
@@ -22,6 +23,8 @@ function NavBar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
+  const [isAddMovieModalOpen, setIsAddMovieModalOpen] = useState(false);
+
   const [newUserName, setNewUserName] = useState("");
   const users = useSelector(usersSelect);
   const onlyFavorites = useSelector(onlyFavoritesSelect);
@@ -36,6 +39,7 @@ function NavBar() {
     dispatch(setUser(option.value));
   };
   const handeAddUserClick = () => setIsAddUserModalOpen(true);
+  const handeAddMovieClick = () => setIsAddMovieModalOpen(true);
   const options = users.list.map((el) => ({
     value: `${el.id}`,
     label: el.name,
@@ -64,6 +68,12 @@ function NavBar() {
               value="+ Add User"
               fontSize="14px"
             />
+            <Button
+              variant={2}
+              onClick={handeAddMovieClick}
+              value="+ Add Movie"
+              fontSize="14px"
+            />
             <Dropdown
               className="drop-down-users"
               menuClassName="drop-down-users-menu"
@@ -78,6 +88,10 @@ function NavBar() {
               confirm={handleAddUserCinfirm}
               onChange={setNewUserName}
               value={newUserName}
+            />
+            <MovieModal
+              isOpen={isAddMovieModalOpen}
+              close={() => setIsAddMovieModalOpen(false)}
             />
             <S.Favorite
               src={onlyFavorites ? starOn : starOff}
