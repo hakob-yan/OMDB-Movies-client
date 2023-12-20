@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { updateMovie } from "../../redux/features/movies/moviesSlice";
 import MovieModal from "../../components/MovieModal";
 import { toast } from "react-toastify";
+import { formatTitle } from "../../utils";
 
 function Movie() {
   let { movieId } = useParams();
@@ -45,7 +46,7 @@ function Movie() {
         <S.MovieWrapper image={movie ? movie.image : ""}>
           <MovieModal
             data={{
-              title: movie.title,
+              title: formatTitle(movie.title),
               year: movie.year,
               runtime: movie.runtime,
               director: movie.director,
@@ -57,7 +58,7 @@ function Movie() {
             close={() => setIsEditModalOpen(false)}
           />
           <S.AboutSection>
-            <S.Title>{movie.title}</S.Title>
+            <S.Title>{formatTitle(movie.title)}</S.Title>
             <S.SubTitle>Year: {movie.year}</S.SubTitle>
             <S.SubTitle>Runtime: {movie.runtime}</S.SubTitle>
             <S.SubTitle>Genre: {movie.genre}</S.SubTitle>

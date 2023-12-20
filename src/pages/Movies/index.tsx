@@ -19,6 +19,7 @@ import Loader from "../../components/Loader";
 import { useDebouncedCallback } from "use-debounce";
 import { SEARCH } from "../../constants";
 import { usersSelect } from "../../redux/features/users/selectors";
+import { formatTitle } from "../../utils";
 
 const Home = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -86,7 +87,7 @@ const Home = (): ReactElement => {
                   <MovieCard
                     isFavorite={movie.is_favorite}
                     key={movie.imdb_id}
-                    title={movie.title}
+                    title={formatTitle(movie.title)}
                     year={movie.year}
                     runtime={movie.runtime}
                     genre={movie.genre}
