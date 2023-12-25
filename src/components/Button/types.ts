@@ -5,4 +5,5 @@ export interface IButton {
   width?: string;
   height?: string;
   fontSize?: string;
+  isDisabled?: boolean;
 }

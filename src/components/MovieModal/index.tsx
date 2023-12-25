@@ -7,6 +7,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { IFormData } from "./utils";
 import { IMovie } from "../../pages/Movie/types";
 import { toast } from "react-toastify";
+import { WRAPPER_ID } from "../../constants";
+import { useState } from "react";
 
 function Modal({
   isOpen,
@@ -26,7 +28,7 @@ function Modal({
     formState: { errors },
   } = useForm<IFormData>({ defaultValues: data });
   const dispatch = useAppDispatch();
-
+  const [isButtonsDisabled, setIsButtonsDisabled] = useState(true);
   const submit: SubmitHandler<IFormData> = async (data) => {
     if (data.movieId) {
       const result = await dispatch(updateMovie({ id: data.movieId, data }));
@@ -38,14 +40,18 @@ function Modal({
     toast("New Movie Added");
     close();
   };
-
+  const handleWrapperClick = (event: React.MouseEvent<HTMLElement>) => {
+    const wrapper = document.getElementById(WRAPPER_ID);
+    event.target === wrapper && close();
+  };
   if (isOpen) {
     return createPortal(
-      <S.ModalWrapper>
+      <S.ModalWrapper onClick={handleWrapperClick} id={WRAPPER_ID}>
         <S.ModalContenet onSubmit={handleSubmit(submit)}>
           <S.InputTitles>Title</S.InputTitles>
           <S.Input
             {...register("title", {
+              onChange: (e) => setIsButtonsDisabled(false),
               required: true,
               pattern: {
                 value: /[A-Za-z]{3,}/,
@@ -57,6 +63,7 @@ function Modal({
           <S.InputTitles>Year</S.InputTitles>
           <S.Input
             {...register("year", {
+              onChange: (e) => setIsButtonsDisabled(false),
               required: true,
               pattern: {
                 value: /^[12][0-9]{3}$/,
@@ -68,6 +75,7 @@ function Modal({
           <S.InputTitles>Runtime</S.InputTitles>
           <S.Input
             {...register("runtime", {
+              onChange: (e) => setIsButtonsDisabled(false),
               required: true,
               pattern: {
                 value: /[A-Za-z]{3,}/,
@@ -80,6 +88,7 @@ function Modal({
           <S.InputTitles>Genre</S.InputTitles>
           <S.Input
             {...register("genre", {
+              onChange: (e) => setIsButtonsDisabled(false),
               required: true,
               pattern: {
                 value: /[A-Za-z]{3,}/,
@@ -92,6 +101,7 @@ function Modal({
           <S.InputTitles>Director</S.InputTitles>
           <S.Input
             {...register("director", {
+              onChange: (e) => setIsButtonsDisabled(false),
               required: true,
               pattern: {
                 value: /[A-Za-z]{3,}/,
@@ -102,7 +112,7 @@ function Modal({
           <S.InputError>{errors?.director?.message}</S.InputError>
 
           <S.ModalBody>
-            <Button value="Save" />
+            <Button value="Save" isDisabled={isButtonsDisabled} />
             <Button value="Cancel" onClick={close} />
           </S.ModalBody>
         </S.ModalContenet>
